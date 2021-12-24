@@ -68,7 +68,7 @@ function Validator(options) {
     function validate(inputElement, rule) {
         var errorMessage;
         // var errorMessage = rule.test(inputElement.value);
-        var parentForm = getParentElement(inputElement,options.selectorForm);
+        var parentForm = getParentElement(inputElement, options.selectorForm);
         var rules = elementRules[rule.selector];
         var length = rules.length;
         for (var i = 0; i < length; i++) {
@@ -76,14 +76,14 @@ function Validator(options) {
 
             if (errorMessage) break;
         }
-        
+
 
         if (errorMessage) {
-            if(parentForm){
+            if (parentForm) {
                 parentForm.querySelector(options.errorElement).innerText = errorMessage;
-                parentForm.classList.add('invalid');
+                parentForm.classList.add(options.invalidSelector);
             }
-            
+
         }
         return !errorMessage;
     }
@@ -94,10 +94,10 @@ function Validator(options) {
      * @returns fasle if parent element not found
      */
     function typing(inputElement) {
-        var parentForm = getParentElement(inputElement,options.selectorForm);
-        if(parentForm){
+        var parentForm = getParentElement(inputElement, options.selectorForm);
+        if (parentForm) {
             parentForm.querySelector(options.errorElement).innerText = '';
-            parentForm.classList.remove('invalid');
+            parentForm.classList.remove(options.invalidSelector);
             return;
         }
         return false;
@@ -110,9 +110,9 @@ function Validator(options) {
      * @param {*} selector of element's parent 
      * @returns element's parent if exist
      */
-    function getParentElement(element,selector) {
-        while(element.parentElement){
-            if(element.parentElement.matches(selector)){
+    function getParentElement(element, selector) {
+        while (element.parentElement) {
+            if (element.parentElement.matches(selector)) {
                 return element.parentElement;
             }
             element = element.parentElement;
