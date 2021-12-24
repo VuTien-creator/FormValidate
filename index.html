@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example</title>
+</head>
+
+<body>
+    <div class="main">
+        <form action="" id="form-1" method="POST">
+            <div class="form-group">
+                <label for="name">name</label>
+                <input name="name" type="text" id="name">
+                <span class="form-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="email">email</label>
+                <input name="email" type="text" id="email">
+                <span class="form-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">password</label>
+                <input name="password" type="text" id="password">
+                <span class="form-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="password_confirm">password confirm</label>
+                <input name="password_confirm" type="text" id="password_confirm">
+                <span class="form-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">gender</label>
+                <input name="gender" type="radio" value="male">male
+                <input name="gender" type="radio" value="female">female
+                <input type="radio" name="gender" value="other">other
+                <span class="form-message"></span>
+            </div>
+            <button>submit</button>
+        </form>
+    </div>
+
+    <script src="./main.js"></script>
+    <script>
+        Validator({
+            form: '#form-1',
+            errorElement: '.form-message',
+            selectorForm: '.form-group',
+            rules: [
+                Validator.isRequired('#name'),
+                // Validator.isRequired('#gender'),
+
+                Validator.isRequired('#email'),
+                Validator.isEmail('#email'),
+
+                // Validator.isRequired('#password'),
+                // Validator.minLength('#password',6),
+
+                // Validator.isRequired('#password_confirm'),
+                // Validator.confirm('#password_confirm',function(){
+                //     return document.querySelector('#form-1 #password').value;
+                // }),
+            ],
+            onSubmit: function (data) {
+                console.log(data);
+            },
+        });
+    </script>
+</body>
+
+</html>
